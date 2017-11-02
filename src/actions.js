@@ -5,3 +5,23 @@ export function makeMove(cell) {
         y: cell[1]
     };
 }
+
+export function declareWinner(winner) {
+    return {
+        type: 'DECLARE_WINNER',
+        winner
+    }
+}
+
+export function reset() {
+    return {
+        type: 'RESET',
+    }
+}
+
+export function draw(isDraw) {
+    return {
+        type: 'DRAW',
+        isDraw
+    }
+}

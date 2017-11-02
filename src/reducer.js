@@ -17,13 +17,45 @@ export default (state = {}, action) => {
             // }
             let newState = Object.assign({}, state);
             newState.board[action.x][action.y] = state.char;
-            newState.char = newState.char === "x" ? "o" : "x";
+            let location = action.x.toString() + action.y.toString();
+            newState.char === "X" ? newState.xCoords.push(location) : newState.yCoords.push(location);
+            newState.char = newState.char === "X" ? "O" : "X";
+            
             return {
                 ...state,
                 board: newState.board,
-                char: newState.char
+                char: newState.char,
+                xCoords: newState.xCoords,
+                yCoords: newState.yCoords
             }
 
+        case 'DECLARE_WINNER' :
+            return {
+                ...state,
+                winner: action.winner
+            }
+        
+        case 'RESET' : {
+            return {
+                ...state,
+                board: [
+                    ["","",""],
+                    ["","",""],
+                    ["","",""]
+                ],
+                char: "X",
+                xCoords: [],
+                yCoords: [],
+                winner: ""
+            };
+        }
+        
+        case 'DRAW' : {
+            return {
+                ...state,
+                isDraw: action.isDraw
+            }
+        }
 
         default:
             return state;
